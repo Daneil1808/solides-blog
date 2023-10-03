@@ -12,12 +12,10 @@ public class PhotoService {
     private PhotoRepository photoRepository;
 
     public Photo addPhoto(Photo photo) {
-        // Lógica para adicionar uma foto a um álbum
         return photoRepository.save(photo);
     }
 
     public void deletePhoto(Long photoId) {
-        // Lógica para excluir uma foto (verificar se o usuário é o criador, etc.)
         photoRepository.deleteById(photoId);
     }
 }

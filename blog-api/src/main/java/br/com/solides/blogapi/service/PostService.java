@@ -15,22 +15,18 @@ public class PostService {
     private PostRepository postRepository;
 
     public Post createPost(Post post) {
-        // Lógica para criar um novo post
         return postRepository.save(post);
     }
 
     public Optional<Post> getPost(Long postId) {
-        // Lógica para obter um post por ID
         return postRepository.findById(postId);
     }
 
     public void deletePost(Long postId) {
-        // Lógica para excluir um post (verificar se o usuário é o criador, etc.)
         postRepository.deleteById(postId);
     }
 
     public List<Post> getAllPosts() {
-        // Lógica para obter todos os posts
         return postRepository.findAll();
     }
 }

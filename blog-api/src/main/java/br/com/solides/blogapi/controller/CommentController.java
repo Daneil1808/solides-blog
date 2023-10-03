@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
@@ -14,9 +15,12 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping
-    public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
-        Comment addedComment = commentService.addComment(comment);
+    @PostMapping("/postId")
+    public ResponseEntity<Comment> addComment(
+            @RequestBody Long postId,
+            @RequestBody Comment comment
+    ) {
+        Comment addedComment = commentService.addComment(postId, comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedComment);
     }
 

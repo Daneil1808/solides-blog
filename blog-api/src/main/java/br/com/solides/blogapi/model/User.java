@@ -15,8 +15,8 @@ public class User {
     private Long id;
 
     private String username;
-    private String password; // Lembre-se de criptografar a senha na implementação real
-    private String role;
+    private String password;
+    private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;

@@ -18,22 +18,27 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(User user) {
-        // Verificar se o usuário já existe
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser.isPresent()) {
-            // Lançar uma exceção ou retornar um resultado indicando que o usuário já existe
+            throw new RuntimeException("Usuário já existe no sistema");
         }
-
-        // Criptografar a senha antes de salvar
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // Salvar o usuário no banco de dados
         return userRepository.save(user);
     }
 
-    public String loginUser(User user) {
-        // Lógica de autenticação aqui, gerar token JWT, etc.
-        // Retornar o token gerado
-        return null;
+    public void loginUser(User user) {
+        Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
+
+        if (existingUser.isPresent() && passwordEncoder.matches(user.getPassword(), existingUser.get().getPassword())) {
+            // Gere um token JWT
+            /*String token = Jwts.builder()
+                    .setSubject(user.getUsername())
+                    .signWith(SignatureAlgorithm.HS512, "secretKey")
+                    .compact();
+
+            return token;*/
+        } else {
+            throw new RuntimeException("Credenciais inválidas");
+        }
     }
 }

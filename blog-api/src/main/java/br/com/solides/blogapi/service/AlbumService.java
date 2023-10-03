@@ -15,22 +15,18 @@ public class AlbumService {
     private AlbumRepository albumRepository;
 
     public Album createAlbum(Album album) {
-        // Lógica para criar um novo álbum
         return albumRepository.save(album);
     }
 
     public Optional<Album> getAlbum(Long albumId) {
-        // Lógica para obter um álbum por ID
         return albumRepository.findById(albumId);
     }
 
     public void deleteAlbum(Long albumId) {
-        // Lógica para excluir um álbum (verificar se o usuário é o criador, etc.)
         albumRepository.deleteById(albumId);
     }
 
     public List<Album> getAllAlbums() {
-        // Lógica para obter todos os álbuns
         return albumRepository.findAll();
     }
 }
